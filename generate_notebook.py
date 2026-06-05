@@ -1,6 +1,5 @@
 import json
 
-# Define the notebook structure programmatically to build eda_audit.ipynb
 notebook_content = {
     "cells": [
         {
@@ -35,7 +34,7 @@ notebook_content = {
             "metadata": {},
             "source": [
                 "## 1. Data Loading and Base Table Inspections\n",
-                "We load all 7 core data assets and verify shapes against known operational parameters."
+                "We load all core data assets and verify shapes against known operational parameters."
             ]
         },
         {
@@ -99,11 +98,11 @@ notebook_content = {
             "source": [
                 "# Plot 1: Target Variable Breakdown\n",
                 "plt.figure(figsize=(6, 4))\n",
-                "sns.countplot(data=labels, x='churn_next_60d', hue='churn_next_60d', palette='viridis', legend=False)\n",
+                "sns.countplot(data=labels, x='churn_label', hue='churn_label', palette='viridis', legend=False)\n",
                 "plt.title('Distribution of Churn Labels (Target Balance Check)')\n",
                 "plt.xlabel('Churn Target (1 = Churned, 0 = Retained)')\n",
                 "plt.savefig('outputs/chart1_target_balance.png', dpi=300, bbox_inches='tight')\n",
-                "plt.show()"
+                "plt.close()"
             ]
         },
         {
@@ -118,23 +117,22 @@ notebook_content = {
                 "plt.title('Support Desk Issue Volume by Category Type')\n",
                 "plt.xlabel('Total Logged Tickets')\n",
                 "plt.savefig('outputs/chart2_support_categories.png', dpi=300, bbox_inches='tight')\n",
-                "plt.show()"
+                "plt.close()"
             ]
         },
         {
             "cell_type": "code",
             "execution_count": None,
-            "metadata": {},
-            "outputs": [],
+            "metadata": [],
             "source": [
                 "# Plot 3: Boxplot of Recency Days vs Churn State\n",
                 "merged_rfm = pd.merge(rfm_snap, labels, on='customer_id')\n",
                 "plt.figure(figsize=(7, 4))\n",
-                "sns.boxplot(data=merged_rfm, x='churn_next_60d', y='recency_days', palette='Set2', hue='churn_next_60d', legend=False)\n",
+                "sns.boxplot(data=merged_rfm, x='churn_label', y='recency_days', palette='Set2', hue='churn_label', legend=False)\n",
                 "plt.title('Order Recency Spans vs. Observed Customer Churn')\n",
                 "plt.ylabel('Days Since Most Recent Order')\n",
                 "plt.savefig('outputs/chart3_recency_boxplot.png', dpi=300, bbox_inches='tight')\n",
-                "plt.show()"
+                "plt.close()"
             ]
         },
         {
@@ -149,7 +147,7 @@ notebook_content = {
                 "plt.title('180-Day Customer Historical Purchase Frequency')\n",
                 "plt.xlabel('Number of Orders Logged')\n",
                 "plt.savefig('outputs/chart4_frequency_distribution.png', dpi=300, bbox_inches='tight')\n",
-                "plt.show()"
+                "plt.close()"
             ]
         },
         {
@@ -160,11 +158,11 @@ notebook_content = {
             "source": [
                 "# Plot 5: App Platform Sessions vs Observed Churn\n",
                 "plt.figure(figsize=(7, 4))\n",
-                "sns.violinplot(data=merged_rfm, x='churn_next_60d', y='sessions_30d', palette='coolwarm', hue='churn_next_60d', legend=False)\n",
+                "sns.violinplot(data=merged_rfm, x='churn_label', y='sessions_30d', palette='coolwarm', hue='churn_label', legend=False)\n",
                 "plt.title('30-Day Platform Session Frequencies vs Churn Outcomes')\n",
                 "plt.ylabel('Total Volumetric Sessions')\n",
                 "plt.savefig('outputs/chart5_session_violin.png', dpi=300, bbox_inches='tight')\n",
-                "plt.show()"
+                "plt.close()"
             ]
         },
         {
@@ -175,12 +173,12 @@ notebook_content = {
             "source": [
                 "# Plot 6: Financial Monetary Distribution vs Acquisition Footprint\n",
                 "plt.figure(figsize=(8, 4))\n",
-                "sns.barplot(data=merged_rfm, x='acquisition_channel', y='monetary_180d', hue='churn_next_60d', palette='muted', errorbar=None)\n",
+                "sns.barplot(data=merged_rfm, x='acquisition_channel', y='monetary_180d', hue='churn_label', palette='muted', errorbar=None)\n",
                 "plt.title('Mean 180-Day Revenue Contributions by Sourcing Vector')\n",
                 "plt.ylabel('Average Gross Revenue Value (₹)')\n",
                 "plt.xticks(rotation=15)\n",
                 "plt.savefig('outputs/chart6_monetary_sourcing.png', dpi=300, bbox_inches='tight')\n",
-                "plt.show()\n",
+                "plt.close()\n",
                 "print('All 6 high-resolution analysis plots generated and cached successfully.')"
             ]
         }
@@ -199,8 +197,7 @@ notebook_content = {
     "nbformat_minor": 2
 }
 
-# Write content to local file
 with open("eda_audit.ipynb", "w", encoding="utf-8") as f:
     json.dump(notebook_content, f, indent=2)
 
-print("SUCCESS: eda_audit.ipynb file generated cleanly in your project root!")
+print("SUCCESS: eda_audit.ipynb file generated")
