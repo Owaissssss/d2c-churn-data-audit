@@ -1,5 +1,7 @@
 # D2C Customer Churn Intelligence — Part 1: Data Audit & Business Explorations
 
+[![Jupyter Notebook Preview](https://img.shields.io/badge/render-nbviewer-orange.svg)](https://nbviewer.org/github/Owaissssss/d2c-churn-data-audit/blob/master/eda_audit.ipynb)
+
 This repository constitutes **Part 1** of the 4-part D2C Personal-Care Churn Intelligence Capstone Project. It contains full data sanity reports, operational leakage assessments, and code required to inspect initial user behavior before modeling workflows.
 
 ## Repository File Structure
